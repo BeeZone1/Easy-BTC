@@ -1,0 +1,17 @@
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\bin\Debug\Easy BTC.exe.config
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\bin\Debug\Easy BTC.exe
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\bin\Debug\Easy BTC.pdb
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\MainWindow.g.cs
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\App.g.cs
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC_MarkupCompile.cache
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC_MarkupCompile.lref
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\MainWindow.baml
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC.g.resources
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy_BTC.Properties.Resources.resources
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC.csproj.GenerateResource.Cache
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC.csproj.CoreCompileInputs.cache
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC.exe
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC.pdb
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\bin\Debug\Newtonsoft.Json.dll
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\bin\Debug\Newtonsoft.Json.xml
+C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC.csprojResolveAssemblyReference.cache

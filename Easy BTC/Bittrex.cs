@@ -16,7 +16,7 @@ namespace Easy_BTC
     {
         List<TokenDataRow> dataTableBittrex = new List<TokenDataRow>();
         List<TokenDataRow> dataTableBittrexTemp = new List<TokenDataRow>();
-        LogStruct[,] history30minArrB = new LogStruct[108001, 300];
+        LogStruct[,] history30minArrB = new LogStruct[2000, 300];
         static int indexHistoryB;
         SortingTime btnSortBittrex = SortingTime.min5;
         SucessClass sucessBittrex = new SucessClass();
@@ -49,20 +49,23 @@ namespace Easy_BTC
                         dataRow.CurrentPrice = result["Last"].ToObject<decimal>();
                         dataRow.Low24hr = result["Low"].ToObject<decimal>();
 
-                        if (indexHistoryB >= 5 && indexHistoryB < 15)
+                        if (!flag30min)
                         {
-                            dataRow.PercentChange5min = ChangeColorFormulaB(dataRow.CurrentPrice, 5, indexTemp);
+                            if (indexHistoryB >= 300 / interval && indexHistoryB < 900 / interval)
+                            {
+                                dataRow.PercentChange5min = ChangeColorFormulaB(dataRow.CurrentPrice, 300 / interval, indexTemp);
+                            }
+                            else if (indexHistoryB >= 900 / interval && indexHistoryB <= 1800 / interval)
+                            {
+                                dataRow.PercentChange5min = ChangeColorFormulaB(dataRow.CurrentPrice, 300 / interval, indexTemp); ;
+                                dataRow.PercentChange15min = ChangeColorFormulaB(dataRow.CurrentPrice, 900 / interval, indexTemp); ;
+                            }
                         }
-                        else if (indexHistoryB >= 15 && indexHistoryB < 30)
+                        else
                         {
-                            dataRow.PercentChange5min = ChangeColorFormulaB(dataRow.CurrentPrice, 5, indexTemp); ;
-                            dataRow.PercentChange15min = ChangeColorFormulaB(dataRow.CurrentPrice, 15, indexTemp); ;
-                        }
-                        else if (indexHistoryB >= 30)
-                        {
-                            dataRow.PercentChange5min = ChangeColorFormulaB(dataRow.CurrentPrice, 5, indexTemp); ;
-                            dataRow.PercentChange15min = ChangeColorFormulaB(dataRow.CurrentPrice, 15, indexTemp); ;
-                            dataRow.PercentChange30min = ChangeColorFormulaB(dataRow.CurrentPrice, 30, indexTemp); ;
+                            dataRow.PercentChange5min = ChangeColorFormulaB(dataRow.CurrentPrice, 300 / interval, indexTemp); ;
+                            dataRow.PercentChange15min = ChangeColorFormulaB(dataRow.CurrentPrice, 900 / interval, indexTemp); ;
+                            dataRow.PercentChange30min = ChangeColorFormulaB(dataRow.CurrentPrice, 1800 / interval, indexTemp); ;
                         }
                         dataTableBittrex.Add(dataRow);
                         indexTemp++;
@@ -78,10 +81,14 @@ namespace Easy_BTC
         /// <param name="mins"></param>
         /// <param name="indexTemp"></param>
         /// <returns></returns>
-        private decimal ChangeColorFormulaB(decimal currPrice, int mins, int indexTemp)
+        private decimal ChangeColorFormulaB(decimal currPrice, int ticks, int indexTemp)
         {
-            return 100 - currPrice * 100 / history30minArrB[indexHistoryB - mins, indexTemp].currentPrice;
+            if (indexHistoryB - ticks >= 0)
+                return (currPrice / history30minArrB[indexHistoryB - ticks, indexTemp].currentPrice - 1) * 100;
+            else
+                return (currPrice / history30minArrB[1800 / interval + indexHistoryB - ticks, indexTemp].currentPrice - 1) * 100;
         }
+
 
         /// <summary>
         /// Фильтр по названию
@@ -124,26 +131,42 @@ namespace Easy_BTC
                 item.TriggerColor5min = ChangeRowColorBittrex(item.PercentChange5min, item.TriggerColor5min, item.Name);
                 item.TriggerColor15min = ChangeRowColorBittrex(item.PercentChange15min, item.TriggerColor15min, item.Name);
                 item.TriggerColor30min = ChangeRowColorBittrex(item.PercentChange30min, item.TriggerColor30min, item.Name);
+
+                if (item.CurrentPrice < item.Low24hr)
+                {
+                    SucessClass sucess = new SucessClass();
+                    sucess.Name = item.Name;
+                    sucess.Percent = "LOW24";
+                    sucess.DateTimeCell = DateTime.Now.ToLongTimeString();
+                    successPoloniexDataGrid.Items.Insert(0, sucess);
+                }
             }
         }
 
         private Triggers ChangeRowColorBittrex(decimal percent, Triggers triggerColor, string coinName)
         {
             if (percent <= -50)
-                triggerColor = Easy_BTC.Triggers.Green;
-            else if (percent > -50 && percent <= 1)
-                triggerColor = Easy_BTC.Triggers.Red;
-            else if (percent > 1 && percent <= 8)
             {
-                triggerColor = Easy_BTC.Triggers.Orange;
+                triggerColor = Easy_BTC.Triggers.Green;
                 SucessClass sucess = new SucessClass();
                 sucess.Name = coinName;
-                sucess.Percent = percent;
-                sucess.DateTimeCell = DateTime.Now;
+                sucess.Percent = percent.ToString("F2");
+                sucess.DateTimeCell = DateTime.Now.ToLongTimeString();
                 successBittrexDataGrid.Items.Insert(0, sucess);
             }
+            else if (percent > -50 && percent <= 3)
+                triggerColor = Easy_BTC.Triggers.Red;
+            else if (percent > 3 && percent <= 8)
+                triggerColor = Easy_BTC.Triggers.Orange;
             else if (percent > 8)
+            {
                 triggerColor = Easy_BTC.Triggers.Green;
+                SucessClass sucess = new SucessClass();
+                sucess.Name = coinName;
+                sucess.Percent = percent.ToString("F2");
+                sucess.DateTimeCell = DateTime.Now.ToLongTimeString();
+                successBittrexDataGrid.Items.Insert(0, sucess);
+            }
             return triggerColor;
         }
     }

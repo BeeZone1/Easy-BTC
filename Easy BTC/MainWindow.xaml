@@ -10,18 +10,18 @@
     <DockPanel Margin="0,0,0.2,-0.4">
         <Grid HorizontalAlignment="Stretch" Margin="-9,0,0,-19.4" Width="3220">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="8*"/>
-                <ColumnDefinition Width="303*"/>
-                <ColumnDefinition Width="1299*"/>
+                <ColumnDefinition Width="17*"/>
+                <ColumnDefinition Width="622*"/>
+                <ColumnDefinition Width="2581*"/>
             </Grid.ColumnDefinitions>
             <!--Poloniex table-->
-            <TextBox x:Name="txtFilterPoloniex" HorizontalAlignment="Left" Height="19" Margin="42,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" TextChanged="txtFilter_TextChangedP" Grid.Column="1"/>
+            <TextBox x:Name="txtFilterPoloniex" HorizontalAlignment="Left" Height="19" Margin="42.2,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82" TextChanged="txtFilter_TextChangedP" Grid.Column="1"/>
             <Label Content="FIlter:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Height="23" Width="56" Grid.ColumnSpan="2"/>
-            <RadioButton Content="5min" Grid.Column="1" HorizontalAlignment="Left" Margin="226,14,0,0" VerticalAlignment="Top" GroupName="radiobtnSort" IsChecked="True" Checked="RadioButton_CheckedP"/>
-            <RadioButton Content="15min" Grid.Column="1" HorizontalAlignment="Left" Margin="276,15,0,0" VerticalAlignment="Top" GroupName="radiobtnSort" Checked="RadioButton_CheckedP"/>
-            <RadioButton Content="30min" Grid.Column="1" HorizontalAlignment="Left" Margin="335,16,0,0" VerticalAlignment="Top" GroupName="radiobtnSort" Checked="RadioButton_CheckedP"/>
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible" CanContentScroll="True" Foreground="Red" Margin="0,33,130.6,0" Grid.ColumnSpan="2">
-                <DataGrid AutoGenerateColumns="False" Name="commonPoloniexDataGrid" HorizontalAlignment="Left" Height="2236" VerticalAlignment="Top" Width="491">
+            <RadioButton Content="5min" Grid.Column="1" HorizontalAlignment="Left" Margin="226.2,14,0,0" VerticalAlignment="Top" GroupName="radiobtnSort" IsChecked="True" Checked="RadioButton_CheckedP" Height="14" Width="46"/>
+            <RadioButton Content="15min" Grid.Column="1" HorizontalAlignment="Left" Margin="276.2,15,0,0" VerticalAlignment="Top" GroupName="radiobtnSort" Checked="RadioButton_CheckedP" Height="15" Width="52"/>
+            <RadioButton Content="30min" Grid.Column="1" HorizontalAlignment="Left" Margin="335.2,16,0,0" VerticalAlignment="Top" GroupName="radiobtnSort" Checked="RadioButton_CheckedP" Height="15" Width="52"/>
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible" CanContentScroll="True" Foreground="Red" Margin="0,33,129.2,49" Grid.ColumnSpan="2">
+                <DataGrid AutoGenerateColumns="False" Name="commonPoloniexDataGrid" HorizontalAlignment="Left" Height="2164" VerticalAlignment="Top" Width="491">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Coin" Binding="{Binding Name}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Price" Binding="{Binding CurrentPrice}"></DataGridTextColumn>
@@ -96,10 +96,10 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </ScrollViewer>
-            <Label Content="Sorting by:" Grid.Column="1" HorizontalAlignment="Left" Margin="159,7,0,0" VerticalAlignment="Top"/>
+            <Label Content="Sorting by:" Grid.Column="1" HorizontalAlignment="Left" Margin="159.2,7,0,0" VerticalAlignment="Top" Height="26" Width="67"/>
 
             <!--Bittrex table-->
-            <DataGrid Name="commonBittrexDataGrid" AutoGenerateColumns="False" Grid.Column="2" HorizontalAlignment="Left" Height="2202" Margin="131.4,33,0,0" VerticalAlignment="Top" Width="407">
+            <DataGrid Name="commonBittrexDataGrid" AutoGenerateColumns="False" Grid.Column="2" HorizontalAlignment="Left" Height="2159" VerticalAlignment="Top" Width="436" Margin="128.8,37,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Coin" Binding="{Binding Name}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Price" Binding="{Binding CurrentPrice}"></DataGridTextColumn>
@@ -172,30 +172,34 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBox x:Name="txtFilterBittrex"  Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="200.4,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="txtFilter_TextChangedB"/>
-            <Label Content="Filter:" Grid.Column="2" HorizontalAlignment="Left" Margin="157.4,6,0,0" VerticalAlignment="Top"/>
-            <Label Content="Sorting by:" Grid.Column="2" HorizontalAlignment="Left" Margin="293.4,5,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="5min" Grid.Column="2" HorizontalAlignment="Left" Margin="360.4,11,0,0" VerticalAlignment="Top" GroupName="radiobtnSort2" IsChecked="True" Checked="RadioButton_CheckedB"/>
-            <RadioButton Content="15min" Grid.Column="2" HorizontalAlignment="Left" Margin="410.4,12,0,0" VerticalAlignment="Top" GroupName="radiobtnSort2" Checked="RadioButton_CheckedB"/>
-            <RadioButton Content="30min" Grid.Column="2" HorizontalAlignment="Left" Margin="469.4,13,0,0" VerticalAlignment="Top" GroupName="radiobtnSort2" Checked="RadioButton_CheckedB"/>
+            <TextBox x:Name="txtFilterBittrex"  Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="201.8,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TextChanged="txtFilter_TextChangedB"/>
+            <Label Content="Filter:" Grid.Column="2" HorizontalAlignment="Left" Margin="158.8,6,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
+            <Label Content="Sorting by:" Grid.Column="2" HorizontalAlignment="Left" Margin="294.8,5,0,0" VerticalAlignment="Top" Height="26" Width="67"/>
+            <RadioButton Content="5min" Grid.Column="2" HorizontalAlignment="Left" Margin="361.8,11,0,0" VerticalAlignment="Top" GroupName="radiobtnSort2" IsChecked="True" Checked="RadioButton_CheckedB" Height="15" Width="46"/>
+            <RadioButton Content="15min" Grid.Column="2" HorizontalAlignment="Left" Margin="411.8,12,0,0" VerticalAlignment="Top" GroupName="radiobtnSort2" Checked="RadioButton_CheckedB" Height="15" Width="52"/>
+            <RadioButton Content="30min" Grid.Column="2" HorizontalAlignment="Left" Margin="470.8,13,0,0" VerticalAlignment="Top" GroupName="radiobtnSort2" Checked="RadioButton_CheckedB" Height="15" Width="52"/>
 
             <!--Poloniex success-->
-            <DataGrid Name="successPoloniexDataGrid" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="1" HorizontalAlignment="Left" Height="2163" Margin="480,33,0,0" VerticalAlignment="Top" Width="197" Grid.ColumnSpan="2">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Coin" Binding="{Binding Name}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="%" Binding="{Binding Percent, StringFormat=###.##}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="DateTime" Binding="{Binding DateTimeCell}"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible" CanContentScroll="True" Grid.Column="1" Margin="507.2,33,2476,-20" Grid.ColumnSpan="2">
+                <DataGrid Name="successPoloniexDataGrid" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Column="1" HorizontalAlignment="Left" Height="2170" VerticalAlignment="Top" Width="210" Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Coin" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="%" Binding="{Binding Percent, StringFormat=###.##}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Time" Binding="{Binding DateTimeCell}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
 
             <!--Bittrex success-->
-            <DataGrid Name="successBittrexDataGrid" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="2" HorizontalAlignment="Left" Height="2163" Margin="543.4,33,0,0" VerticalAlignment="Top" Width="205">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Coin" Binding="{Binding Name}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="%" Binding="{Binding Percent, StringFormat=###.##}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="DateTime" Binding="{Binding DateTimeCell}"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible" CanContentScroll="True" Margin="579.8,37,1758,0" Grid.Column="2">
+                <DataGrid Name="successBittrexDataGrid" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Column="2" HorizontalAlignment="Left" Height="2163" VerticalAlignment="Top" Width="233">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Coin" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="%" Binding="{Binding Percent, StringFormat=###.##}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Time" Binding="{Binding DateTimeCell}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
         </Grid>
     </DockPanel>
 </Window>

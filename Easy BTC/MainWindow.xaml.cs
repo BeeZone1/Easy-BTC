@@ -34,7 +34,9 @@ namespace Easy_BTC
     public partial class MainWindow : Window
     {
         DispatcherTimer UpdateTablesTimer = new DispatcherTimer();
-        DispatcherTimer OneMinTimer = new DispatcherTimer();
+        bool flag30min;
+        const int interval = 5; //Change it to set up speed of updating tables, secs
+
         private bool UserFilterPoloniex(object item)
         {
             if (String.IsNullOrEmpty(txtFilterPoloniex.Text))
@@ -55,13 +57,15 @@ namespace Easy_BTC
             InitializeComponent();
             indexHistoryP = 0;
             indexHistoryB = 0;
+            flag30min = false;
+
         }
 
         #region Таймер
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateTables(sender, e);
-            UpdateTablesTimer.Interval = new TimeSpan(0, 0, 0, 1);
+            UpdateTablesTimer.Interval = new TimeSpan(0, 0, 0, interval);
             UpdateTablesTimer.Tick += new EventHandler(UpdateTables);
             UpdateTablesTimer.Start();
 
@@ -70,70 +74,79 @@ namespace Easy_BTC
 
         private void UpdateTables(object sender, EventArgs e)
         {
-            RefillPoloniex();
-            ChangeRowPoloniex();
-            RefillBittrex();
-            ChangeRowBittrex();
-
-            #region Logs, Sort, Filter
-            //Log Poloniex
-            if (indexHistoryP == 1800) indexHistoryP = 0;
-            for (int i = 0; i < dataTablePoloniex.Count; i++)
+            try
             {
-                history30minArrP[indexHistoryP, i].coinName = dataTablePoloniex[i].Name;
-                history30minArrP[indexHistoryP, i].currentPrice = dataTablePoloniex[i].CurrentPrice;
-            }
-            indexHistoryP++;
+                RefillPoloniex();
+                ChangeRowPoloniex();
+                RefillBittrex();
+                ChangeRowBittrex();
 
-            //Log Bittrex
-            if (indexHistoryB == 1800) indexHistoryB = 0;
-            for (int i = 0; i < dataTableBittrex.Count; i++)
+                #region Logs, Sort, Filter
+                //Log Poloniex
+                if (indexHistoryP >= 1800 / interval)
+                {
+                    indexHistoryP = 0;
+                    flag30min = true;
+                }
+                for (int i = 0; i < dataTablePoloniex.Count; i++)
+                {
+                    history30minArrP[indexHistoryP, i].coinName = dataTablePoloniex[i].Name;
+                    history30minArrP[indexHistoryP, i].currentPrice = dataTablePoloniex[i].CurrentPrice;
+                }
+                indexHistoryP++;
+
+                //Log Bittrex
+                if (indexHistoryB >= 1800 / interval) indexHistoryB = 0;
+                for (int i = 0; i < dataTableBittrex.Count; i++)
+                {
+                    history30minArrB[indexHistoryB, i].coinName = dataTableBittrex[i].Name;
+                    history30minArrB[indexHistoryB, i].currentPrice = dataTableBittrex[i].CurrentPrice;
+                }
+                indexHistoryB++;
+
+                //Sort&Filter Poloniex
+                switch (btnSortPoloniex)
+                {
+                    case SortingTime.min5:
+                        dataTablePoloniexTemp = dataTablePoloniex.OrderByDescending(i => i.PercentChange5min).ToList();
+                        break;
+                    case SortingTime.min15:
+                        dataTablePoloniexTemp = dataTablePoloniex.OrderByDescending(i => i.PercentChange15min).ToList();
+                        break;
+                    case SortingTime.min30:
+                        dataTablePoloniexTemp = dataTablePoloniex.OrderByDescending(i => i.PercentChange30min).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                commonPoloniexDataGrid.ItemsSource = dataTablePoloniexTemp;
+                CollectionView viewP = (CollectionView)CollectionViewSource.GetDefaultView(commonPoloniexDataGrid.ItemsSource);
+                viewP.Filter = UserFilterPoloniex;
+
+                //Sort&Filter Bittrex
+                switch (btnSortBittrex)
+                {
+                    case SortingTime.min5:
+                        dataTableBittrexTemp = dataTableBittrex.OrderByDescending(i => i.PercentChange5min).ToList();
+                        break;
+                    case SortingTime.min15:
+                        dataTableBittrexTemp = dataTableBittrex.OrderByDescending(i => i.PercentChange15min).ToList();
+                        break;
+                    case SortingTime.min30:
+                        dataTableBittrexTemp = dataTableBittrex.OrderByDescending(i => i.PercentChange30min).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                commonBittrexDataGrid.ItemsSource = dataTableBittrexTemp;
+                CollectionView viewB = (CollectionView)CollectionViewSource.GetDefaultView(commonBittrexDataGrid.ItemsSource);
+                viewB.Filter = UserFilterBittrex;
+                #endregion
+            }
+            catch (Exception ex)
             {
-                history30minArrB[indexHistoryB, i].coinName = dataTableBittrex[i].Name;
-                history30minArrB[indexHistoryB, i].currentPrice = dataTableBittrex[i].CurrentPrice;
+                //TODO
             }
-            indexHistoryB++;
-
-            //Sort&Filter Poloniex
-            switch (btnSortPoloniex)
-            {
-                case SortingTime.min5:
-                    dataTablePoloniexTemp = dataTablePoloniex.OrderByDescending(i => i.PercentChange5min).ToList();
-                    break;
-                case SortingTime.min15:
-                    dataTablePoloniexTemp = dataTablePoloniex.OrderByDescending(i => i.PercentChange15min).ToList();
-                    break;
-                case SortingTime.min30:
-                    dataTablePoloniexTemp = dataTablePoloniex.OrderByDescending(i => i.PercentChange30min).ToList();
-                    break;
-                default:
-                    break;
-            }
-            commonPoloniexDataGrid.ItemsSource = dataTablePoloniexTemp;
-            CollectionView viewP = (CollectionView)CollectionViewSource.GetDefaultView(commonPoloniexDataGrid.ItemsSource);
-            viewP.Filter = UserFilterPoloniex;
-
-            //Sort&Filter Bittrex
-
-            switch (btnSortBittrex)
-            {
-                case SortingTime.min5:
-                    dataTableBittrexTemp = dataTableBittrex.OrderByDescending(i => i.PercentChange5min).ToList();
-                    break;
-                case SortingTime.min15:
-                    dataTableBittrexTemp = dataTableBittrex.OrderByDescending(i => i.PercentChange15min).ToList();
-                    break;
-                case SortingTime.min30:
-                    dataTableBittrexTemp = dataTableBittrex.OrderByDescending(i => i.PercentChange30min).ToList();
-                    break;
-                default:
-                    break;
-            }
-            commonBittrexDataGrid.ItemsSource = dataTableBittrexTemp;
-            CollectionView viewB = (CollectionView)CollectionViewSource.GetDefaultView(commonBittrexDataGrid.ItemsSource);
-            viewB.Filter = UserFilterBittrex;
-            #endregion
         }
-
     }
 }

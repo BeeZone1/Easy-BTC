@@ -16,7 +16,7 @@ namespace Easy_BTC
     {
         List<TokenDataRow> dataTablePoloniex = new List<TokenDataRow>();
         List<TokenDataRow> dataTablePoloniexTemp = new List<TokenDataRow>();
-        LogStruct[,] history30minArrP = new LogStruct[108001, 80];
+        LogStruct[,] history30minArrP = new LogStruct[2000, 80];
         static int indexHistoryP;
         SortingTime btnSortPoloniex = SortingTime.min5;
 
@@ -51,20 +51,23 @@ namespace Easy_BTC
                         dataRow.Low24hr = prop.Value["low24hr"].ToObject<decimal>();
                         dataRow.PercentChangePoloniex = prop.Value["percentChange"].ToObject<decimal>() * 100;
 
-                        if (indexHistoryP >= 5 && indexHistoryP < 15)
+                        if (!flag30min)
                         {
-                            dataRow.PercentChange5min = ChangeColorFormulaP(dataRow.CurrentPrice, 5, indexTemp);
+                            if (indexHistoryP >= 300 / interval && indexHistoryP < 900 / interval)
+                            {
+                                dataRow.PercentChange5min = ChangeColorFormulaP(dataRow.CurrentPrice, 300 / interval, indexTemp);
+                            }
+                            else if (indexHistoryP >= 900 / interval && indexHistoryP < 1800 / interval)
+                            {
+                                dataRow.PercentChange5min = ChangeColorFormulaP(dataRow.CurrentPrice, 300 / interval, indexTemp); ;
+                                dataRow.PercentChange15min = ChangeColorFormulaP(dataRow.CurrentPrice, 900 / interval, indexTemp); ;
+                            }
                         }
-                        else if (indexHistoryP >= 15 && indexHistoryP < 30)
+                        else
                         {
-                            dataRow.PercentChange5min = ChangeColorFormulaP(dataRow.CurrentPrice, 5, indexTemp); ;
-                            dataRow.PercentChange15min = ChangeColorFormulaP(dataRow.CurrentPrice, 15, indexTemp); ;
-                        }
-                        else if (indexHistoryP >= 30)
-                        {
-                            dataRow.PercentChange5min = ChangeColorFormulaP(dataRow.CurrentPrice, 5, indexTemp); ;
-                            dataRow.PercentChange15min = ChangeColorFormulaP(dataRow.CurrentPrice, 15, indexTemp); ;
-                            dataRow.PercentChange30min = ChangeColorFormulaP(dataRow.CurrentPrice, 30, indexTemp); ;
+                            dataRow.PercentChange5min = ChangeColorFormulaP(dataRow.CurrentPrice, 300 / interval, indexTemp); ;
+                            dataRow.PercentChange15min = ChangeColorFormulaP(dataRow.CurrentPrice, 900 / interval, indexTemp); ;
+                            dataRow.PercentChange30min = ChangeColorFormulaP(dataRow.CurrentPrice, 1800 / interval, indexTemp); ;
                         }
                         //((ArrayList)commonPoloniexListView.Resources["poloniexCommonInfoListViewData"]).Add(dataRow);
                         dataTablePoloniex.Add(dataRow);
@@ -117,9 +120,12 @@ namespace Easy_BTC
         /// <param name="mins"></param>
         /// <param name="indexTemp"></param>
         /// <returns></returns>
-        private decimal ChangeColorFormulaP(decimal currPrice, int mins, int indexTemp)
+        private decimal ChangeColorFormulaP(decimal currPrice, int ticks, int indexTemp)
         {
-            return 100 - currPrice * 100 / history30minArrP[indexHistoryP - mins, indexTemp].currentPrice;
+            if (indexHistoryB - ticks >= 0)
+                return (currPrice / history30minArrP[indexHistoryP - ticks, indexTemp].currentPrice - 1) * 100;
+            else
+                return (currPrice / history30minArrP[1800 / interval + indexHistoryP - ticks, indexTemp].currentPrice - 1) * 100;
         }
 
         private void ChangeRowPoloniex()
@@ -129,27 +135,42 @@ namespace Easy_BTC
                 item.TriggerColor5min = ChangeRowColorPoloniex(item.PercentChange5min, item.TriggerColor5min, item.Name);
                 item.TriggerColor15min = ChangeRowColorPoloniex(item.PercentChange15min, item.TriggerColor15min, item.Name);
                 item.TriggerColor30min = ChangeRowColorPoloniex(item.PercentChange30min, item.TriggerColor30min, item.Name);
+
+                if (item.CurrentPrice < item.Low24hr)
+                {
+                    SucessClass sucess = new SucessClass();
+                    sucess.Name = item.Name;
+                    sucess.Percent = "LOW24";
+                    sucess.DateTimeCell = DateTime.Now.ToLongTimeString();
+                    successPoloniexDataGrid.Items.Insert(0, sucess);
+                }
             }
         }
 
         private Triggers ChangeRowColorPoloniex(decimal percent, Triggers triggerColor, string coinName)
         {
             if (percent <= -50)
-                triggerColor = Easy_BTC.Triggers.Green;
-            else if (percent > -50 && percent <= 1)
-                triggerColor = Easy_BTC.Triggers.Red;
-            else if (percent > 1 && percent <= 8)
             {
-                triggerColor = Easy_BTC.Triggers.Orange;
+                triggerColor = Easy_BTC.Triggers.Green;
                 SucessClass sucess = new SucessClass();
                 sucess.Name = coinName;
-                sucess.Percent = percent;
-                sucess.DateTimeCell = DateTime.Now;
+                sucess.Percent = percent.ToString("F2");
+                sucess.DateTimeCell = DateTime.Now.ToLongTimeString();
                 successPoloniexDataGrid.Items.Insert(0, sucess);
             }
-
+            else if (percent > -50 && percent <= 3)
+                triggerColor = Easy_BTC.Triggers.Red;
+            else if (percent > 3 && percent <= 8)
+                triggerColor = Easy_BTC.Triggers.Orange;
             else if (percent > 8)
+            {
                 triggerColor = Easy_BTC.Triggers.Green;
+                SucessClass sucess = new SucessClass();
+                sucess.Name = coinName;
+                sucess.Percent = percent.ToString("F2");
+                sucess.DateTimeCell = DateTime.Now.ToLongTimeString();
+                successPoloniexDataGrid.Items.Insert(0, sucess);
+            }
             return triggerColor;
         }
     }

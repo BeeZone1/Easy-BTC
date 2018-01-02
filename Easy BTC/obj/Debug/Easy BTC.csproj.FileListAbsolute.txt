@@ -15,3 +15,37 @@ C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC.pdb
 C:\Users\PC\source\repos\Easy BTC\Easy BTC\bin\Debug\Newtonsoft.Json.dll
 C:\Users\PC\source\repos\Easy BTC\Easy BTC\bin\Debug\Newtonsoft.Json.xml
 C:\Users\PC\source\repos\Easy BTC\Easy BTC\obj\Debug\Easy BTC.csprojResolveAssemblyReference.cache
+D:\Projects\Easy BTC\Easy BTC\bin\Debug\Easy BTC.exe.config
+D:\Projects\Easy BTC\Easy BTC\bin\Debug\Easy BTC.exe
+D:\Projects\Easy BTC\Easy BTC\bin\Debug\Easy BTC.pdb
+D:\Projects\Easy BTC\Easy BTC\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\Easy BTC\Easy BTC\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\MainWindow.g.cs
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\App.g.cs
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy BTC_MarkupCompile.cache
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy BTC_MarkupCompile.lref
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\MainWindow.baml
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy BTC.g.resources
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy_BTC.Properties.Resources.resources
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy BTC.csproj.GenerateResource.Cache
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy BTC.csproj.CoreCompileInputs.cache
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy BTC.exe
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy BTC.pdb
+D:\Projects\Easy BTC\Easy BTC\obj\Debug\Easy BTC.csprojResolveAssemblyReference.cache
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\bin\Debug\Easy BTC.exe.config
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\bin\Debug\Easy BTC.exe
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\bin\Debug\Easy BTC.pdb
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy BTC.csprojResolveAssemblyReference.cache
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\MainWindow.g.cs
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\App.g.cs
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy BTC_MarkupCompile.cache
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy BTC_MarkupCompile.lref
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\MainWindow.baml
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy BTC.g.resources
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy_BTC.Properties.Resources.resources
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy BTC.csproj.GenerateResource.Cache
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy BTC.csproj.CoreCompileInputs.cache
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy BTC.exe
+D:\Projects\GitRepo\Easy-BTC\Easy BTC\obj\Debug\Easy BTC.pdb

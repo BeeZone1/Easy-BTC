@@ -71,7 +71,7 @@ namespace Easy_BTC
     class SucessClass
     {
         public string Name { get; set; }
-        public decimal Percent { get; set; }
-        public DateTime DateTimeCell { get; set; }
+        public string Percent { get; set; }
+        public string DateTimeCell { get; set; }
     }
 }
